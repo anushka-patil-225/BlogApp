@@ -1,0 +1,13 @@
+/* App.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    color: #1a1a1a; /* Text color for better readability */
+  }
+  
+  main {
+    min-height: calc(100vh - 60px); /* Adjust to leave space for header */
+    padding: 20px;
+  }
+  

@@ -72,3 +72,4 @@ Feel free to explore the codebase and start creating and sharing your blogs with
 
 Happy blogging!
 "# BlogApp" 
+"# Blog" 
