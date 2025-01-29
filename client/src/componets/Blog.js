@@ -64,16 +64,16 @@ const Blog = ({ title, desc, img, user, isUser, id, name }) => {
           </Box>
         )}
         <CardHeader
-  title={title}
-  titleTypographyProps={{
-    sx: {
-      paddingBottom: "5px", // Remove extra space under the title
-      fontFamily: "Times New Roman, serif", // Set to Times New Roman font
-      fontWeight: "bold", // Optional: Change the font weight
-      fontSize: "1.2rem", // Adjust font size (smaller)
-    },
-  }}
-/>
+          title={title}
+          titleTypographyProps={{
+            sx: {
+              paddingBottom: "5px", // Remove extra space under the title
+              fontFamily: "Times New Roman, serif", // Set to Times New Roman font
+              fontWeight: "bold", // Optional: Change the font weight
+              fontSize: "1.2rem", // Adjust font size (smaller)
+            },
+          }}
+        />
 
         <CardMedia
           component="img"
@@ -82,10 +82,7 @@ const Blog = ({ title, desc, img, user, isUser, id, name }) => {
           sx={{
             height: "180px",
             objectFit: "cover",
-            paddingTop: "5px",
-            paddingBottom: "5px",
-            paddingLeft: "20px",
-            paddingRight: "20px",
+            padding: "10px", // Unified padding
           }}
         />
         <CardContent
@@ -108,7 +105,7 @@ const Blog = ({ title, desc, img, user, isUser, id, name }) => {
             color="text.primary"
             sx={{ marginTop: "10px", fontWeight: "bold" }}
           >
-            By: {name}
+            By: {user} {/* Fallback for missing name */}
           </Typography>
         </CardContent>
       </Card>

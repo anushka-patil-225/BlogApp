@@ -32,8 +32,12 @@ const UpdateBlog = () => {
     e.preventDefault();
     setLoading(true); // Show loading state
     setError(null); // Clear previous errors
+    console.log(`${config.BASE_URL}/api/update/${id}`);
     try {
-      const res = await axios.put(`${config.BASE_URL}/api/update/${id}`, blog);
+      const res = await axios.put(
+        `${config.BASE_URL}/api/blogs/update/${id}`,
+        blog
+      );
 
       if (res.status === 200) {
         alert("Blog updated successfully!");

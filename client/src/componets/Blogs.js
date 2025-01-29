@@ -7,6 +7,7 @@ import "../CSS/Blogs.css";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState();
+  const [userName, setUserName] = useState();
 
   const sendRequest = async () => {
     const res = await axios
@@ -17,26 +18,29 @@ const Blogs = () => {
   };
 
   useEffect(() => {
-    sendRequest().then((data) => setBlogs(data.blogs));
+    sendRequest().then((data) => {
+      console.log(data.blogs);
+      setBlogs(data.blogs);
+    });
   }, []);
-
-  console.log(blogs);
 
   return (
     <div className="blogs-container">
       {blogs &&
         blogs.map((blog, index) => (
-          <Link key={index}
-          to={`/blogs/${blog._id}`}
-          style={{ textDecoration: "none", color: "inherit" }}>
-          <Blog
-            id={blog._id}
-            isUser={localStorage.getItem("userId") === blog.user._id}
-            title={blog.title}
-            img={blog.img}
-            user={blog.user.name}
-            date={new Date(blog.date).toLocaleDateString()}
-          />
+          <Link
+            key={index}
+            to={`/blogs/${blog._id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <Blog
+              id={blog._id}
+              isUser={localStorage.getItem("userId") === blog.user._id}
+              title={blog.title}
+              img={blog.img}
+              user={blog.user.name}
+              date={new Date(blog.date).toLocaleDateString()}
+            />
           </Link>
         ))}
     </div>
