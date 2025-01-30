@@ -7,7 +7,6 @@ import "../CSS/Blogs.css";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState();
-  const [userName, setUserName] = useState();
 
   const sendRequest = async () => {
     const res = await axios

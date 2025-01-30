@@ -20,38 +20,6 @@ const getAllBlogs = async (req, res, next) => {
   return res.status(200).json({ blogs });
 };
 
-// const addBlog = async(req,res,next) =>{
-
-//     const { title , desc , img , user } = req.body;
-
-//     let existingUser;
-//     try {
-//         existingUser = await User.findById(user);
-//     } catch (e) {
-//         return console.log(e);
-//     }
-
-//     if(!existingUser){
-//         return res.status(400).json({message: " Unautorized"});
-//     }
-//     const blog = new Blog({
-//         title ,desc , img , user
-//     });
-
-//     try {
-//       const session = await mongoose.startSession();
-//       session.startTransaction();
-//       await  blog.save({session});
-//       existingUser.blogs.push(blog);
-//       await existingUser.save({session});
-//       await session.commitTransaction();
-//     } catch (e) {
-//        return res.status(500).json({message:e})
-//     }
-
-//     return res.status(200).json({blog});
-// }
-
 const addBlog = async (req, res, next) => {
   const { title, desc, img, user } = req.body;
 
@@ -103,8 +71,6 @@ const updateBlog = async (req, res) => {
   let blog;
 
   try {
-    // Update the blog and return the updated document
-
     blog = await Blog.findByIdAndUpdate(blogId, { title, desc }, { new: true });
     console.log(blogId);
   } catch (e) {
@@ -146,8 +112,6 @@ const deleteBlog = async (req, res, next) => {
     if (!blog) {
       return res.status(404).json({ message: "Blog not found" });
     }
-
-    // Remove the blog from the user's blogs array
     const user = blog.user;
     user.blogs.pull(blog);
     await user.save();

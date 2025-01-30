@@ -8,6 +8,7 @@ import UserBlogs from './componets/UserBlogs'
 import AddBlogs from './componets/AddBlogs'
 import BlogDetail from './componets/BlogDetail'
 import UpdateBlog from "./componets/UpdateBlog";
+import Footer from './componets/Footer';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     <header>
       <Header/>
     </header>
-    <main className="app-container">
+    <main className="app-container" style={{ paddingTop: '70px' }}>
     <Routes>
       <Route path="/" element={<Blogs/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
@@ -27,6 +28,8 @@ function App() {
       <Route path="/updateBlog/:id" element={<UpdateBlog />} />
     </Routes>
     </main>
+    <Footer/>
+
 
   </React.Fragment>;
 }

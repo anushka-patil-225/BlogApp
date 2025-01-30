@@ -1,10 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { makeStyles } from "@mui/styles";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import config from "../config";
-import DeleteButton from "./DeleteBlogs";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -43,12 +41,33 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
     width: "100%",
   },
+  button: {
+    padding: "8px 16px",
+    borderRadius: "5px",
+    color: "white",
+    fontWeight: "bold",
+    border: "none",
+    cursor: "pointer",
+    transition: "background-color 0.3s ease",
+  },
+  updateButton: {
+    backgroundColor: "blue",
+    "&:hover": {
+      backgroundColor: "darkblue",
+    },
+  },
+  deleteButton: {
+    backgroundColor: "red",
+    "&:hover": {
+      backgroundColor: "darkred",
+    },
+  },
 }));
 
 const UserBlogs = () => {
   const classes = useStyles();
   const [userBlogs, setUserBlogs] = useState([]);
-  const navigate = useNavigate(); // For navigation
+  const navigate = useNavigate(); 
   const userId = localStorage.getItem("userId");
 
   const fetchUserBlogs = async () => {
@@ -74,7 +93,7 @@ const UserBlogs = () => {
   };
 
   const handleUpdate = (blogId) => {
-    navigate(`/updateBlog/${blogId}`); // Navigate to UpdateBlog component with the blog ID
+    navigate(`/updateBlog/${blogId}`);
   };
 
   return (
@@ -91,8 +110,18 @@ const UserBlogs = () => {
               alt={blog.title}
             />
             <div className={classes.buttonContainer}>
-            <button onClick={() => handleUpdate(blog._id)}>Update</button>
-              <DeleteButton blogId={blog._id} onDelete={handleDelete} />
+              <button
+                className={`${classes.button} ${classes.updateButton}`}
+                onClick={() => handleUpdate(blog._id)}
+              >
+                Update
+              </button>
+              <button
+                className={`${classes.button} ${classes.deleteButton}`}
+                onClick={() => handleDelete(blog._id)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))

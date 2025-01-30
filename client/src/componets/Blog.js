@@ -8,20 +8,14 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useStyles } from "./utils";
 import config from "../config";
 
-const Blog = ({ title, desc, img, user, isUser, id, name }) => {
+const Blog = ({ title, desc, img, user, id }) => {
   const classes = useStyles();
   const navigate = useNavigate();
-
-  const handleEdit = () => {
-    navigate(`/myBlogs/${id}`);
-  };
 
   const deleteRequest = async () => {
     const res = await axios
@@ -29,12 +23,6 @@ const Blog = ({ title, desc, img, user, isUser, id, name }) => {
       .catch((err) => console.log(err));
     const data = await res.data;
     return data;
-  };
-
-  const handleDelete = () => {
-    deleteRequest()
-      .then(() => navigate("/"))
-      .then(() => navigate("/blogs"));
   };
 
   return (
@@ -53,16 +41,7 @@ const Blog = ({ title, desc, img, user, isUser, id, name }) => {
           justifyContent: "space-between",
         }}
       >
-        {isUser && (
-          <Box display="flex">
-            <IconButton onClick={handleEdit} sx={{ marginLeft: "auto" }}>
-              <ModeEditOutlineIcon color="warning" />
-            </IconButton>
-            <IconButton onClick={handleDelete}>
-              <DeleteForeverIcon color="error" />
-            </IconButton>
-          </Box>
-        )}
+        
         <CardHeader
           title={title}
           titleTypographyProps={{
@@ -103,7 +82,7 @@ const Blog = ({ title, desc, img, user, isUser, id, name }) => {
           <Typography
             variant="subtitle2"
             color="text.primary"
-            sx={{ marginTop: "10px", fontWeight: "bold" }}
+            sx={{ marginTop: "10px", fontStyle:"italic"}}
           >
             By: {user} {/* Fallback for missing name */}
           </Typography>

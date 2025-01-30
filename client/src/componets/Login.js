@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store";
@@ -7,23 +7,32 @@ import { useNavigate } from "react-router-dom";
 import config from "../config";
 
 const Login = () => {
-  const naviagte = useNavigate();
-  const dispath = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
     password: "",
   });
   const [isSignup, setIsSignup] = useState(false);
+
+  useEffect(() => {
+    // Reset input fields when switching between signup and login
+    setInputs({
+      name: "",
+      email: "",
+      password: "",
+    });
+  }, [isSignup]);
+
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
+
   const sendRequest = async (type = "login") => {
-    console.log("inside send req");
-    console.log(`${config.BASE_URL}/api/users/${type}`);
     const res = await axios
       .post(`${config.BASE_URL}/api/users/${type}`, {
         name: inputs.name,
@@ -33,26 +42,24 @@ const Login = () => {
       .catch((err) => console.log(err));
 
     const data = await res.data;
-    console.log("return");
-    console.log(data);
     return data;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs);
     if (isSignup) {
       sendRequest("signup")
         .then((data) => localStorage.setItem("userId", data.user._id))
-        .then(() => dispath(authActions.login()))
-        .then(() => naviagte("/blogs"));
+        .then(() => dispatch(authActions.login()))
+        .then(() => navigate("/blogs"));
     } else {
       sendRequest()
         .then((data) => localStorage.setItem("userId", data.user._id))
-        .then(() => dispath(authActions.login()))
-        .then(() => naviagte("/blogs"));
+        .then(() => dispatch(authActions.login()))
+        .then(() => navigate("/blogs"));
     }
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -68,7 +75,14 @@ const Login = () => {
           marginTop={5}
           borderRadius={5}
         >
-          <Typography variant="h2" padding={3} textAlign="center">
+          <Typography
+            variant="h4"
+            padding={3}
+            textAlign="center"
+            sx={{
+              color: "rgb(2, 59, 139)",
+            }}
+          >
             {isSignup ? "Signup" : "Login"}
           </Typography>
           {isSignup && (
@@ -79,7 +93,7 @@ const Login = () => {
               placeholder="Name"
               margin="normal"
             />
-          )}{" "}
+          )}
           <TextField
             name="email"
             onChange={handleChange}
@@ -99,7 +113,16 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            sx={{ borderRadius: 3, marginTop: 3 }}
+            sx={{
+              borderRadius: 3,
+              marginTop: 3,
+              backgroundColor: "rgb(2, 59, 139)",
+              color: "white",
+              transition: "background-color 0.3s ease-in-out",
+              "&:hover": {
+                backgroundColor: "rgb(76, 127, 199)", // Lighter blue on hover
+              },
+            }}
             color="warning"
           >
             Submit
@@ -108,7 +131,7 @@ const Login = () => {
             onClick={() => setIsSignup(!isSignup)}
             sx={{ borderRadius: 3, marginTop: 3 }}
           >
-            Change To {isSignup ? "Login" : "Signup"}
+            {isSignup ? "Already have an account? Login" : "Don't have an account? Signup"}
           </Button>
         </Box>
       </form>

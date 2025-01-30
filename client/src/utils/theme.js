@@ -1,5 +1,3 @@
-import { blue } from "@mui/material/colors";
-
 export const darkTheme = {
   bg: "black",
   bgLi: "#202020",
@@ -8,9 +6,9 @@ export const darkTheme = {
 };
 
 export const lightTheme = {
-  bg: "rgb(0, 71, 171)",
-  bgLi: "#f9f9f9", // Soft off-white for contrast
-  text: "#1a1a1a", // Rich black for clear readability
-  textSof: "#7d7d7d", // Neutral gray for soft text
-  accent: "#ff7e67", // Vibrant coral for buttons or highlights
+  bg: "rgb(2, 59, 139)",
+  bgLi: "#f9f9f9", 
+  text: "#1a1a1a", 
+  textSof: "#7d7d7d", 
+  accent: "#ff7e67", 
 };

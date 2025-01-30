@@ -5,17 +5,17 @@ import config from "../config";
 import "../CSS/UpdateBlog.css";
 
 const UpdateBlog = () => {
-  const { id } = useParams(); // Fetch blog ID from the route
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const [blog, setBlog] = useState({ title: "", desc: "" });
-  const [loading, setLoading] = useState(false); // Added loading state
-  const [error, setError] = useState(null); // Added error state
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
         const res = await axios.get(`${config.BASE_URL}/api/blogs/${id}`);
-        setBlog(res.data.blog); // Pre-fill the form with existing blog data
+        setBlog(res.data.blog); 
       } catch (err) {
         console.error("Error fetching blog:", err);
         setError("Failed to fetch the blog data. Please try again.");
@@ -30,8 +30,8 @@ const UpdateBlog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Show loading state
-    setError(null); // Clear previous errors
+    setLoading(true); 
+    setError(null); 
     console.log(`${config.BASE_URL}/api/update/${id}`);
     try {
       const res = await axios.put(
@@ -41,7 +41,7 @@ const UpdateBlog = () => {
 
       if (res.status === 200) {
         alert("Blog updated successfully!");
-        navigate("/myBlogs"); // Redirect to user blogs after successful update
+        navigate("/myBlogs"); 
       } else {
         alert("Failed to update the blog. Please try again.");
       }
@@ -49,7 +49,7 @@ const UpdateBlog = () => {
       console.error("Error updating blog:", err);
       setError("An error occurred while updating the blog.");
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false); 
     }
   };
 
