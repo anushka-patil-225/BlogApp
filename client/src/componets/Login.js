@@ -17,7 +17,6 @@ const Login = () => {
   const [isSignup, setIsSignup] = useState(false);
 
   useEffect(() => {
-    // Reset input fields when switching between signup and login
     setInputs({
       name: "",
       email: "",
