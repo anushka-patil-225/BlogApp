@@ -19,7 +19,7 @@ import { lightTheme, darkTheme } from "../utils/theme";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const location = useLocation(); 
+  const location = useLocation();
   const isDark = useSelector((state) => state.theme.isDarkmode);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [value, setValue] = useState(0);
@@ -115,23 +115,6 @@ const Header = () => {
               >
                 Login
               </Button>
-              <Button
-                LinkComponent={Link}
-                to="signup/"
-                sx={{
-                  margin: 1,
-                  fontWeight: "bold",
-                  backgroundColor: "rgb(108, 208, 215)",
-                  borderRadius: 10,
-                  paddingLeft: 2,
-                  paddingRight: 2,
-                  "&:hover": {
-                    backgroundColor: "rgb(96, 157, 161)",
-                  },
-                }}
-              >
-                SignUp
-              </Button>
             </>
           ) : (
             <Box display="flex" alignItems="center" gap={2}>
@@ -155,7 +138,9 @@ const Header = () => {
               <Avatar sx={{ bgcolor: "rgb(108, 208, 215)" }}>
                 <AccountCircleIcon />
               </Avatar>
-              <Typography sx={{ fontWeight: "bold", color: "white" }}></Typography>
+              <Typography
+                sx={{ fontWeight: "bold", color: "white" }}
+              ></Typography>
             </Box>
           )}
 
